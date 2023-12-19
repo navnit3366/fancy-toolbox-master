@@ -95,8 +95,7 @@ def exists_r_list(r_list, target):
     exists = False
     count = 0
     while count < len(r_list) and not exists:
-        element = r_list[count]
-        if element == target:
+        if (element := r_list[count]) == target:
             exists = True
         elif isinstance(element, list):
             exists = exists_r_list(element, target)

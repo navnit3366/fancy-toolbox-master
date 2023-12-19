@@ -512,8 +512,7 @@ class Matrix(object):
 
         REQ: matrix must be a square and not singular
         """
-        det = self.determinant()
-        if det == 0:
+        if (det := self.determinant()) == 0:
             raise SingularMatrixError("matrix is not invertible")
         return self.adjugate() * Fraction(1, det)
 
@@ -584,8 +583,7 @@ class Matrix(object):
         column_vectors = [rref.column_vector(i+1) for i in range(self._cols)]
         prev_pivot_pos = -1
         for col_vector in column_vectors:
-            pivot_pos = Matrix._pivot_position(col_vector)
-            if pivot_pos != prev_pivot_pos:
+            if (pivot_pos := Matrix._pivot_position(col_vector)) != prev_pivot_pos:
                 col_space.add(col_vector)
             prev_pivot_pos = pivot_pos
         return col_space
